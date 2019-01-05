@@ -6,10 +6,12 @@ use Generator;
 use LanguageServerProtocol\Hover;
 use LanguageServerProtocol\Position;
 use LanguageServerProtocol\Range;
+use LanguageServerProtocol\ServerCapabilities;
 use LanguageServerProtocol\TextDocumentIdentifier;
 use Phpactor\Completion\Core\Exception\CouldNotFormat;
 use Phpactor\Completion\Core\Formatter\ObjectFormatter;
 use Phpactor\Extension\LanguageServer\Helper\OffsetHelper;
+use Phpactor\LanguageServer\Core\Handler\CanRegisterCapabilities;
 use Phpactor\LanguageServer\Core\Handler\Handler;
 use Phpactor\LanguageServer\Core\Session\Workspace;
 use Phpactor\TextDocument\TextDocumentBuilder;
@@ -19,7 +21,7 @@ use Phpactor\WorseReflection\Core\Inference\SymbolContext;
 use Phpactor\WorseReflection\Core\Type;
 use Phpactor\WorseReflection\Reflector;
 
-class HoverHandler implements Handler
+class HoverHandler implements Handler, CanRegisterCapabilities
 {
     /**
      * @var Reflector
@@ -75,6 +77,11 @@ class HoverHandler implements Handler
             OffsetHelper::offsetToPosition($document->__toString(), $symbolContext->symbol()->position()->start()),
             OffsetHelper::offsetToPosition($document->__toString(), $symbolContext->symbol()->position()->end())
         ));
+    }
+
+    public function registerCapabiltiies(ServerCapabilities $capabilities)
+    {
+        $capabilities->hoverProvider = true;
     }
 
     private function messageFromSymbolContext(SymbolContext $symbolContext): ?string
