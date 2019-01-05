@@ -1,2 +1,4 @@
 parameters:
     paths: [ lib ]
+    ignoreErrors:
+        - "#Method .* invoked with 1#"
