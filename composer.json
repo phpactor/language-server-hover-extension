@@ -1,0 +1,37 @@
+{
+    "name": "phpactor/language-server-hover-extension",
+    "description": "Hover support for the Language Server",
+    "license": "MIT",
+    "type": "phpactor-extension",
+    "authors": [
+        {
+            "name": "Daniel Leech",
+            "email": "daniel@dantleech.com"
+        }
+    ],
+
+    "require": {
+        "phpactor/container": "^1.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.10.7",
+        "phpunit/phpunit": "^7.5",
+        "friendsofphp/php-cs-fixer": "^2.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phpactor\\Extension\\LanguageServerHover\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phpactor\\Extension\\LanguageServerHover\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "phpactor.extension_class": "Phpactor\\Extension\\LanguageServerHover\\LanguageServerHoverExtension",
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
